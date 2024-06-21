@@ -1,0 +1,17 @@
+django
+django-admin-interface
+django-crispy-forms
+crispy-bootstrap4
+crispy-bootstrap5
+pillow
+zeep
+psycopg2-binary
+django-admin-confirm
+django-axes
+django-simple-captcha
+django-recaptcha
+cloudinary
+whitenoise
+djangorestframework
+
+# pip install -r requeriments.txt

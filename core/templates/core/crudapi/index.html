@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block principal %}
+    <!-- Hero Section -->
+    <section class="hero py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="display-4 mb-4">Periodistas</h1>
+                    <p class="lead">Aquí puedes ver la lista de periodistas desde el API</p>
+                    <a href="{% url 'periodistasadd' %}" class="btn btn-primary py-3 px-5">Agregar Periodista</a>
+                </div>
+                <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                    <img class="img-fluid" src="{% static 'core/img/news_logo.png' %}" alt="Fondo">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+        <!-- Testimonial Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <p class="d-inline-block border rounded-pill py-1 px-4">Testimonial</p>
+            <h1>What Say Our Patients!</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+            {% for aux in indica %}
+            <div class="testimonial-item text-center">
+                <img class="img-fluid rounded-circle mb-4" src="{% static 'core/img/peri.webp' %}" alt="Patient 1">
+                <div class="testimonial-text rounded p-4">
+                    <p>{{aux}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+    <!-- Periodistas List -->
+    <section class="periodistas-list py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th scope="col" class="text-center">PERFIL</th>
+                                    <th scope="col" class="text-center">NOMBRE</th>
+                                    <th scope="col" class="text-center">EDAD</th>
+                                    <th scope="col" class="text-center">ESPECIALIDAD</th>
+                                    <th scope="col" class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for aux in lista %}
+                                <tr>
+                                    <td class="text-center">
+                                        {% if aux.imagen %}
+                                            <img class="rounded-circle img-thumbnail" src="{{ aux.imagen }}" alt="{{ aux.nombre_completo }}" style="max-width: 50px;">
+                                        {% else %}
+                                            <img class="rounded-circle img-thumbnail" src="{% static 'core/img/peri.webp' %}" alt="{{ aux.nombre_completo }}" style="max-width: 50px;">
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">{{ aux.nombre_completo }}</td>
+                                    <td class="text-center">{{ aux.edad }}</td>
+                                    <td class="text-center">{{ aux.especialidad.descripcion }}</td>
+                                    <td class="text-center">
+                                        <a href="{% url 'periodistasupdate' aux.id %}" class="btn btn-sm btn-primary me-2">Modificar</a>
+                                        <a href="#" class="btn btn-sm btn-danger" onclick="confirmarDelete({{ aux.id }})">Eliminar</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Periodistas List End -->
+{% endblock %}
